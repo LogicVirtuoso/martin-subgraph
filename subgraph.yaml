@@ -1,0 +1,28 @@
+specVersion: 0.0.4
+description: MartinB
+repository: https://github.com/jamesVectorspace/martin-subgraph.git
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Bridge
+    network: matic
+    source:
+      address: "0x5B38d44448153DBc72855a125Bfca1945355bBB9"
+      abi: Bridge
+      startBlock: 47283944
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./src/mapping/factory.ts
+      entities:
+        - Bridge
+      abis:
+        - name: Bridge
+          file: ./abi/Bridge.json
+        - name: Martin
+          file: ./abi/Martin.json
+      eventHandlers:
+        - event: DepositEvent(uint256,string)
+          handler: handleDeposit

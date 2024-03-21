@@ -1,0 +1,5 @@
+type Bridge @entity {
+  id: ID!
+  receiverAddress: Bytes!
+  amount: BigInt!
+}
